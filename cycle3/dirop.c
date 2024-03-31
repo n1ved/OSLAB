@@ -7,7 +7,7 @@ void main(){
 	struct dirent *direntPointer;
 	DIR *dirPointer;
 
-	dirPointer = opendir("/home/mec/");
+	dirPointer = opendir("/home/n1ved/Documents/Acadamics/S4/OSLAB");
 
 	if(dirPointer == NULL){
 		printf("Failed open dir\n");

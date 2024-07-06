@@ -3,15 +3,20 @@
 
 void allocate(int mem[] , int mem_s , int proc[] , int proc_s){
     for(int i=0 ; i<proc_s ; i++){
+        int wfit_index = -1;
+        int wfit_dif = 0;
         for(int j=0 ; j<mem_s ; j++){
-            if(proc[i] <= mem[j]){
-                printf("ALLOCATED PROCESS_%d[%d] in MEMORY_BLOCK_%d[%d]\n",i,proc[i],j,mem[j]);
-                mem[j] -= proc[i];
-                proc[i] = 0;
-                break;
+            if(proc[i] < mem[j] && (mem[j] - proc[i]) > wfit_dif){
+                wfit_dif = mem[j] - proc[i];
+                wfit_index = j;
             }
         }
-        if(proc[i] != 0 ){
+        if(wfit_index != -1){
+            printf("ALLOCATED PROCESS_%d[%d] in MEMORY_BLOCK_%d[%d]\n",i,proc[i],wfit_index,mem[wfit_index]);
+            mem[wfit_index] -= proc[i];
+            proc[i] = 0;
+        }
+        else{
             printf("COULD NOT ALLOCATE PROCESS_%d\n",i);
         }
     }
